@@ -1,6 +1,6 @@
 Package: randotools
 Title: Create Randomization Lists
-Version: 0.2.5
+Version: 0.2.7
 Authors@R: 
     c(person("Alan G", "Haynes", email = "alan.haynes@unibe.ch", 
              role = c("aut", "cre"),
@@ -8,8 +8,8 @@ Authors@R:
            )
 Description: Randomization lists are an integral component of randomized clinical trials. 'randotools' provides tools to easily create such lists.
 License: GPL (>= 3)
-URL: https://ctu-bern.github.io/randotools/, https://github.com/CTU-Bern/randotools
-BugReports: https://github.com/CTU-Bern/randotools/issues
+URL: https://dcr-unibe-ch.github.io/randotools/, https://github.com/dcr-unibe-ch/randotools
+BugReports: https://github.com/dcr-unibe-ch/randotools/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports:

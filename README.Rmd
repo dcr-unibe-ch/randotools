@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-`r badger::badge_custom("dev version", as.character(packageVersion("randotools")), "blue", "https://github.com/CTU-Bern/randotools")`
-[![R-CMD-check](https://github.com/CTU-Bern/randotools/workflows/R-CMD-check/badge.svg)](https://github.com/CTU-Bern/randotools/actions)
+`r badger::badge_custom("dev version", as.character(packageVersion("randotools")), "blue", "https://github.com/dcr-unibe-ch/randotools")`
+[![R-CMD-check](https://github.com/dcr-unibe-ch/randotools/workflows/R-CMD-check/badge.svg)](https://github.com/dcr-unibe-ch/randotools/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/randotools)](https://CRAN.R-project.org/package=randotools)
 <!-- badges: end -->
 
@@ -37,13 +37,13 @@ You can install the development version of `randotools` from github with:
 <!-- install.packages("randotools") -->
 
 ``` r
-remotes::install_github("CTU-Bern/randotools")
+remotes::install_github("dcr-unibe-ch/randotools")
 ```
 
-Or from CTU Bern's package universe
+Or from DCR's package universe
 
 ``` r
-install.packages("randotools", repos = c('https://ctu-bern.r-universe.dev', 'https://cloud.r-project.org'))
+install.packages("randotools", repos = c('https://dcr-unibe-ch.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 ## Check the imbalance expected for a proposed strata/blocksize combination
@@ -107,6 +107,6 @@ imbalance_test_plot(imb)
 
 ### Acknowledgements
 
-Development of the package was funded in part via a grant from the [Swiss Clinical Trial Organization Statistics and Methodology Platform](https://www.sctoplatforms.ch/en/scto-platforms/statistics-methodology-5.html).
+Development of the package was funded in part via a grant from the [Swiss Clinical Trial Organization Statistics and Methodology Platform](https://www.scto.ch/clinical-research-tools/platforms/statistics-and-methodology/).
 
 The package logo was created with [`ggplot2`](https://ggplot2.tidyverse.org/) and [`hexSticker`](https://github.com/GuangchuangYu/hexSticker) with icons from [Font Awesome](https://fontawesome.com/).

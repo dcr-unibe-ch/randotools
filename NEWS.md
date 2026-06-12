@@ -1,6 +1,14 @@
-# randotools 0.2.5
+# randotools 0.2.7
 
 Addition of the ability to prioritize small blocksizes at the start of a randomization list. See `randolist`.
+
+# randotools 0.2.6
+
+correct additional URLs
+
+# randotools 0.2.5
+
+update URLs
 
 # randotools 0.2.4
 

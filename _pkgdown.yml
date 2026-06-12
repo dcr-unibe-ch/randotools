@@ -1,4 +1,4 @@
-url: https://CTU-Bern.github.io/randolist/
+url: https://dcr-unibe-ch.github.io/randolist/
 template:
   bootstrap: 5
   light-switch: true
@@ -8,5 +8,5 @@ navbar:
   components:
     github:
       icon: fa-github
-      href: https://github.com/CTU-Bern/randolist
+      href: https://github.com/dcr-unibe-ch/randolist
       target: _blank
