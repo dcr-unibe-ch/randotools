@@ -8,6 +8,10 @@
 #' @param strata named list of stratification variables (see examples)
 #' @param blocksizes numbers of each arm to include in blocks (see details)
 #' @param pascal logical, whether to use pascal's triangle to determine block sizes
+#' @param n_init number of blocks with different blocksize probabilities to
+#' initialize the list with
+#' @param init_probs probabilities to use for each \code{blocksize} for the
+#' \code{n_init} blocks
 #' @param ... arguments passed on to other methods
 #'
 #' @details \code{blocksizes} defines the number of allocations to each arm in a block.
@@ -26,6 +30,11 @@
 #' Unbalanced randomization is possible by specifying the same arm label multiple times.
 #'
 #' To disable block randomisation, set \code{blocksizes} to the same value as \code{n}.
+#'
+#' It can be helpful to use smaller blocks at the start of a randomisation list.
+#' \code{n_small} allows you to define how many blocks to add at the beginning of
+#' the list with a different set of blocksize probabilities (entered via
+#' \code{init_probs})
 #'
 #' @export
 #'
@@ -49,13 +58,21 @@
 #' randolist(10, arms = c("arm 1", "arm 1", "arm 2"))
 #'
 #'
-randolist <- function(n, arms = LETTERS[1:2], strata = NA, blocksizes = 1:3, pascal = TRUE, ...){
+randolist <- function(n,
+                      arms = LETTERS[1:2],
+                      strata = NA,
+                      blocksizes = 1:3,
+                      pascal = TRUE,
+                      n_init = 0,
+                      init_probs = NULL,
+                      ...){
 
   strata_y <- is.list(strata)
 
   if(!strata_y) {
 
-    rlist <- blockrand(n = n, arms = arms, blocksizes = blocksizes, ...)
+    rlist <- blockrand(n = n, arms = arms, blocksizes = blocksizes,
+                       n_init = n_init, init_probs = init_probs, ...)
 
   } else {
 
@@ -68,7 +85,8 @@ randolist <- function(n, arms = LETTERS[1:2], strata = NA, blocksizes = 1:3, pas
       stratum <- nth[x]
 
       # generate randomization for this stratum
-      rlist <- blockrand(n = n, arms = arms, blocksizes = blocksizes, ...)
+      rlist <- blockrand(n = n, arms = arms, blocksizes = blocksizes,
+                         n_init = n_init, init_probs = init_probs, ...)
 
       # add stratum information to the randomization
       rlist$stratum <- stratum

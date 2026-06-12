@@ -61,3 +61,9 @@ test_that("randolist errors or warns on invalid input", {
   expect_error(randolist(n = -1))
   expect_error(randolist(n = 5, arms = NULL))
 })
+
+test_that("error if incorrect number of init_probs supplied", {
+  expect_error(randolist(10, n_init = 3, init_probs = c(.9, .8, .1, 0)))
+  expect_error(randolist(10, n_init = 3, init_probs = 1))
+  expect_error(randolist(10, n_init = 3))
+})

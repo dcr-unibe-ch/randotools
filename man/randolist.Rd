@@ -10,6 +10,8 @@ randolist(
   strata = NA,
   blocksizes = 1:3,
   pascal = TRUE,
+  n_init = 0,
+  init_probs = NULL,
   ...
 )
 }
@@ -23,6 +25,12 @@ randolist(
 \item{blocksizes}{numbers of each arm to include in blocks (see details)}
 
 \item{pascal}{logical, whether to use pascal's triangle to determine block sizes}
+
+\item{n_init}{number of blocks with different blocksize probabilities to
+initialize the list with}
+
+\item{init_probs}{probabilities to use for each \code{blocksize} for the
+\code{n_init} blocks}
 
 \item{...}{arguments passed on to other methods}
 }
@@ -53,6 +61,11 @@ block.
 Unbalanced randomization is possible by specifying the same arm label multiple times.
 
 To disable block randomisation, set \code{blocksizes} to the same value as \code{n}.
+
+It can be helpful to use smaller blocks at the start of a randomisation list.
+\code{n_small} allows you to define how many blocks to add at the beginning of
+the list with a different set of blocksize probabilities (entered via
+\code{init_probs})
 }
 \examples{
 # example code
