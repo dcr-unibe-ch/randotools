@@ -2,6 +2,8 @@
 
 ## randotools 0.2.8
 
+CRAN release: 2026-06-15
+
 set seed in vignette example (to fix issue in CRAN submission)
 
 ## randotools 0.2.7

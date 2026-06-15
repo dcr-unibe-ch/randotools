@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/dcr-unibe-ch/randotools/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/dcr-unibe-ch/randotools/blob/v0.2.8/DESCRIPTION)
 
 Haynes A (2026). *randotools: Create Randomization Lists*. R package
 version 0.2.8, <https://dcr-unibe-ch.github.io/randotools/>.
