@@ -13,6 +13,8 @@ randolist(
   strata = NA,
   blocksizes = 1:3,
   pascal = TRUE,
+  n_init = 0,
+  init_probs = NULL,
   ...
 )
 ```
@@ -39,6 +41,15 @@ randolist(
 
   logical, whether to use pascal's triangle to determine block sizes
 
+- n_init:
+
+  number of blocks with different blocksize probabilities to initialize
+  the list with
+
+- init_probs:
+
+  probabilities to use for each `blocksize` for the `n_init` blocks
+
 - ...:
 
   arguments passed on to other methods
@@ -62,13 +73,32 @@ By default, frequency of the different block sizes is determined using
 Pascal's triangle. This has the advantage that small and large block
 sizes are less common than intermediate sized blocks, which helps with
 making it more difficult to guess future allocations, and reduces the
-risk of finishing in the middle of a large block.
+risk of finishing in the middle of a large block. If`pascal = FALSE`,
+all `blocksize`s have the same frequency.
 
 Unbalanced randomization is possible by specifying the same arm label
 multiple times.
 
 To disable block randomisation, set `blocksizes` to the same value as
 `n`.
+
+It can be helpful to use smaller blocks at the start of a randomisation
+list. `n_init` allows you to define how many blocks to add at the
+beginning of the list with a different set of blocksize probabilities
+(entered via `init_probs`). Note that this modifies the final
+frequencies of the blocksizes - they are no longer according to normal
+settings (pascals triangle, if `pascal = TRUE`, or approximately equal,
+if `pascal = FALSE`). Depending on the settings, it may even be that
+some blocksizes are not observed at all (e.g. if `n_init` exceeds the
+total number of blocks required and `init_probs = c(.8, .1, 0)`, there
+will be none of the larger blocks in the randomisation list.
+
+`n_init` and `init_probs` allow more control over the blocksize
+probabilities than is otherwise possible (i.e. with the `pascal`
+argument). Suppose you want primarily blocks of size 2, with some blocks
+of size 4, you might set `n_init` to `n/2` (as if all blocks were of
+size 2, just to ensure that there are enough blocks for all
+randomisations) and set `init_probs = c(0.8, .2)`.
 
 ## Examples
 

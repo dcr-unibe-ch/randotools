@@ -8,6 +8,7 @@ other related tasks, in R.
 `randotools` is available from CRAN:
 
 ``` r
+
 install.packages("randotools")
 ```
 
@@ -15,12 +16,14 @@ You can install the development version of `randotools` from github
 with:
 
 ``` r
+
 remotes::install_github("dcr-unibe-ch/randotools")
 ```
 
 Or from DCR’s package universe
 
 ``` r
+
 install.packages("randotools", repos = c('https://dcr-unibe-ch.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
@@ -31,6 +34,7 @@ the that will be attained with a certain number of strata is going to be
 appropriate.
 
 ``` r
+
 library(randotools)
 set.seed(456)
 check_plan(50, n_strata = 5, n_sim = 100)
@@ -62,6 +66,7 @@ strata would be recommended.
 Generate the randomisation list itself with `randolist`.
 
 ``` r
+
 set.seed(123)
 r <- randolist(50, arms = c("Trt1", "Trt2"), strata = list(sex = c("Female", "Male")))
 ```
@@ -69,6 +74,7 @@ r <- randolist(50, arms = c("Trt1", "Trt2"), strata = list(sex = c("Female", "Ma
 Create a short summary of the randomisation list with `summary`.
 
 ``` r
+
 summary(r)
 #> ---- Randomisation list report ----
 #> -- Overall
@@ -116,6 +122,7 @@ Export the randomisation list in a database compatible format with
 `randolist_to_db`.
 
 ``` r
+
 randolist_to_db(r, target_db = "REDCap",
                 strata_enc = list(sex = data.frame(sex = c("Female", "Male"),
                                                    code = 1:2)),
@@ -135,6 +142,7 @@ imbalance with what might be observed with simple random allocation.
 randomisation sequence:
 
 ``` r
+
 data(rando_balance)
 imbalance_seq_plots(rando_balance, "rando_res")
 ```
@@ -146,6 +154,7 @@ providing a p-value, which can then be plotted to inspect the observed
 (the red line) and simulated imbalances (the bars):
 
 ``` r
+
 (imb <- imbalance_test(rando_balance, "rando_res"))
 #> Randomisations to date: 100 
 #> Overall imbalance: 0 

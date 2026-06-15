@@ -9,6 +9,7 @@ pre-defined randomisation lists.
 balanced the randomisation has been performed.
 
 ``` r
+
 library(randotools)
 ```
 
@@ -18,14 +19,15 @@ As an example, we will use a dataset that is included within the
 package:
 
 ``` r
+
 data(rando_balance)
 summary(rando_balance)
-#>      strat1        strat2     rando_res          rando_res2       
-#>  Min.   :0.0   Min.   :0.0   Length:100         Length:100        
-#>  1st Qu.:0.0   1st Qu.:0.0   Class :character   Class :character  
-#>  Median :0.5   Median :0.5   Mode  :character   Mode  :character  
-#>  Mean   :0.5   Mean   :0.5                                        
-#>  3rd Qu.:1.0   3rd Qu.:1.0                                        
+#>      strat1        strat2        rando_res       rando_res2 
+#>  Min.   :0.0   Min.   :0.0   Length   :100   Length   :100  
+#>  1st Qu.:0.0   1st Qu.:0.0   N.unique :  2   N.unique :  2  
+#>  Median :0.5   Median :0.5   N.blank  :  0   N.blank  :  0  
+#>  Mean   :0.5   Mean   :0.5   Min.nchar:  4   Min.nchar:  4  
+#>  3rd Qu.:1.0   3rd Qu.:1.0   Max.nchar:  4   Max.nchar:  4  
 #>  Max.   :1.0   Max.   :1.0
 ```
 
@@ -35,6 +37,7 @@ balanced randomisation. The other, `rando_res2`, has a small degree of
 imbalance.
 
 ``` r
+
 table(rando_balance$rando_res)
 #> 
 #> trt1 trt2 
@@ -55,6 +58,7 @@ This function produces up to 6 plots, so the `patchwork` package comes
 in useful for combining the plots via `wrap_plots`.
 
 ``` r
+
 library(patchwork)
 imbalance_seq_plots(rando_balance, 
                     randovar = "rando_res") |> 
@@ -74,6 +78,7 @@ second row) and the specific strata (the combination of each
 stratification variable; the last row).
 
 ``` r
+
 imbalance_seq_plots(rando_balance, 
                     randovar = "rando_res",
                     stratavars = c("strat1", "strat2")) |> 
@@ -91,6 +96,7 @@ equal in the random data than relative to observed data. As such, we
 want a small p-value.
 
 ``` r
+
 imb <- imbalance_test(rando_balance, 
                       randovar = "rando_res2",
                       stratavars = c("strat1", "strat2"))
@@ -112,6 +118,7 @@ the observed data. Ideally, the observed line would be to the left of
 the plot. The p-value is indicated bottom right.
 
 ``` r
+
 imbalance_test_plot(imb)
 ```
 

@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Assessing imbalance">
 </head>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">randotools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Assessing imbalance</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dcr-unibe-ch/randotools/blob/v0.2.6/vignettes/imbalance.Rmd" class="external-link"><code>vignettes/imbalance.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dcr-unibe-ch/randotools/blob/main/vignettes/imbalance.Rmd" class="external-link"><code>vignettes/imbalance.Rmd</code></a></small>
       <div class="d-none name"><code>imbalance.Rmd</code></div>
     </div>
 
@@ -86,12 +86,12 @@ package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">rando_balance</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">rando_balance</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      strat1        strat2     rando_res          rando_res2       </span></span>
-<span><span class="co">#&gt;  Min.   :0.0   Min.   :0.0   Length:100         Length:100        </span></span>
-<span><span class="co">#&gt;  1st Qu.:0.0   1st Qu.:0.0   Class :character   Class :character  </span></span>
-<span><span class="co">#&gt;  Median :0.5   Median :0.5   Mode  :character   Mode  :character  </span></span>
-<span><span class="co">#&gt;  Mean   :0.5   Mean   :0.5                                        </span></span>
-<span><span class="co">#&gt;  3rd Qu.:1.0   3rd Qu.:1.0                                        </span></span>
+<span><span class="co">#&gt;      strat1        strat2        rando_res       rando_res2 </span></span>
+<span><span class="co">#&gt;  Min.   :0.0   Min.   :0.0   Length   :100   Length   :100  </span></span>
+<span><span class="co">#&gt;  1st Qu.:0.0   1st Qu.:0.0   N.unique :  2   N.unique :  2  </span></span>
+<span><span class="co">#&gt;  Median :0.5   Median :0.5   N.blank  :  0   N.blank  :  0  </span></span>
+<span><span class="co">#&gt;  Mean   :0.5   Mean   :0.5   Min.nchar:  4   Min.nchar:  4  </span></span>
+<span><span class="co">#&gt;  3rd Qu.:1.0   3rd Qu.:1.0   Max.nchar:  4   Max.nchar:  4  </span></span>
 <span><span class="co">#&gt;  Max.   :1.0   Max.   :1.0</span></span></code></pre></div>
 <p>The dataset contains four variables:- two stratification variables,
 and two randomisation variables. One randomisation variable,

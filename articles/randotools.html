@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="randotools">
 </head>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">randotools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>randotools</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dcr-unibe-ch/randotools/blob/v0.2.6/vignettes/randotools.Rmd" class="external-link"><code>vignettes/randotools.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dcr-unibe-ch/randotools/blob/main/vignettes/randotools.Rmd" class="external-link"><code>vignettes/randotools.Rmd</code></a></small>
       <div class="d-none name"><code>randotools.Rmd</code></div>
     </div>
 
@@ -220,6 +220,46 @@ by changing the <code>arms</code> argument:</p>
 <p>Adaptive trials sometimes modify the randomisation balance part way
 through a trial, which can be accomplished via this method.</p>
 </div>
+<div class="section level3">
+<h3 id="more-control-over-randomisation-lists">More control over randomisation lists<a class="anchor" aria-label="anchor" href="#more-control-over-randomisation-lists"></a>
+</h3>
+<p>In some cases, such as relatively short randomisation lists including
+larger block sizes, it may be desirable to use smaller blocks at the
+beginning of a randomisation list. The <code>n_init</code> and
+<code>init_probs</code> arguments provide the means to accomplish that.
+They add <code>n_init</code> blocks to the beginning of the
+randomisation list (per strata) with blocksizes according to
+<code>init_probs</code>.</p>
+<p>For example, the following code will add 2 blocks with blocks of size
+2 and 3 with probabilities of 0.8 and 0.2, respectively, and no blocks
+of size 6.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/randolist.html">randolist</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span>, n_init <span class="op">=</span> <span class="fl">2</span>, init_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.8</span>,<span class="fl">.2</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>We can go beyond the addition of <code>n_init</code> blocks to the
+beginning of the list. Using this method, we can use specific
+probabilities for the various blocksizes (by default, intermediate
+blocksizes are more frequent than the smallest/largest, when
+<code>pascal = TRUE</code>, or equal probabilities, when
+<code>pascal = FALSE</code>). In order to specify the probabilities for
+the full list, set <code>n_init</code> to some value large enough that
+the full list can be generated with the <code>n_init</code> blocks
+(e.g. <code>n_init</code> should be at least
+<code>n</code>/<code>min(blocksizes)</code>). For example, to generate a
+list with block sizes 2, 4 and 6 with probabilities of 0.7, .2, .1,
+i.e. prioritizing blocks of size 2, and 50 randomisations, we can use
+the following code:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/randolist.html">randolist</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span>, </span>
+<span>          blocksizes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="co"># blocksizes*length(arms) = final blocksizes</span></span>
+<span>          n_init <span class="op">=</span> <span class="fl">25</span>, <span class="co"># 50/min(blocksizes*length(arms))</span></span>
+<span>          init_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.7</span>,<span class="fl">.2</span>,<span class="fl">.1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>This gives the following blocksize frequencies:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="va">blocksize</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 2 4 6 </span></span>
+<span><span class="co">#&gt; 7 3 4</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="summarizing-randomisation-lists">Summarizing randomisation lists<a class="anchor" aria-label="anchor" href="#summarizing-randomisation-lists"></a>
@@ -228,7 +268,7 @@ through a trial, which can be accomplished via this method.</p>
 the requirements, such as the balance, coding, etc, are met. The
 <code>randolist</code> package includes a <code>summary</code> precisely
 for this purpose:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/randolist.html">randolist</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span>, arms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Trt1"</span>, <span class="st">"Trt2"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ---- Randomisation list report ----</span></span>
 <span><span class="co">#&gt; -- Overall</span></span>
@@ -254,7 +294,7 @@ others, which may require other modifications. The
 <code>randolist</code> package includes a function to convert the
 randomisation list into a format that should be, with minimal effort, be
 importable into these systems.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a very small randomisation list for demonstration purposes</span></span>
 <span><span class="va">rs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/randolist.html">randolist</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, blocksizes <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                 arms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Aspirin"</span>, <span class="st">"Placebo"</span><span class="op">)</span>,</span>
@@ -267,32 +307,32 @@ data frame with the columns appropriate for the target database
 (<code>target_db</code>). In the case of REDCap, it is necessary to
 provide a data frame which maps the arms provided in
 <code>randolist</code> to the database variables.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/randolist_to_db.html">randolist_to_db</a></span><span class="op">(</span><span class="va">rs2</span>, target_db <span class="op">=</span> <span class="st">"REDCap"</span>, </span>
 <span>                rando_enc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>arm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Aspirin"</span>, <span class="st">"Placebo"</span><span class="op">)</span>,</span>
 <span>                                       rand_result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                strata_enc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span>, code <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>                                  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Teen"</span>, <span class="st">"Adult"</span><span class="op">)</span>, code <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   rand_result sex age</span></span>
-<span><span class="co">#&gt; 1           1   1   1</span></span>
-<span><span class="co">#&gt; 2           2   1   1</span></span>
-<span><span class="co">#&gt; 3           2   2   1</span></span>
-<span><span class="co">#&gt; 4           1   2   1</span></span>
+<span><span class="co">#&gt; 1           2   1   1</span></span>
+<span><span class="co">#&gt; 2           1   1   1</span></span>
+<span><span class="co">#&gt; 3           1   2   1</span></span>
+<span><span class="co">#&gt; 4           2   2   1</span></span>
 <span><span class="co">#&gt; 5           1   1   2</span></span>
 <span><span class="co">#&gt; 6           2   1   2</span></span>
 <span><span class="co">#&gt; 7           2   2   2</span></span>
 <span><span class="co">#&gt; 8           1   2   2</span></span></code></pre></div>
 <p>SecuTrial uses a more standardised format, so
 <code>rando_encoding</code> is not required.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/randolist_to_db.html">randolist_to_db</a></span><span class="op">(</span><span class="va">rs2</span>, target_db <span class="op">=</span> <span class="st">"secuTrial"</span>,</span>
 <span>                strata_enc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Male"</span>, <span class="st">"Female"</span><span class="op">)</span>, code <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>                                  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Teen"</span>, <span class="st">"Adult"</span><span class="op">)</span>, code <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Number   Group       sex       age</span></span>
-<span><span class="co">#&gt; 1      1 Aspirin value = 1 value = 1</span></span>
-<span><span class="co">#&gt; 2      2 Placebo value = 1 value = 1</span></span>
-<span><span class="co">#&gt; 3      3 Placebo value = 2 value = 1</span></span>
-<span><span class="co">#&gt; 4      4 Aspirin value = 2 value = 1</span></span>
+<span><span class="co">#&gt; 1      1 Placebo value = 1 value = 1</span></span>
+<span><span class="co">#&gt; 2      2 Aspirin value = 1 value = 1</span></span>
+<span><span class="co">#&gt; 3      3 Aspirin value = 2 value = 1</span></span>
+<span><span class="co">#&gt; 4      4 Placebo value = 2 value = 1</span></span>
 <span><span class="co">#&gt; 5      5 Aspirin value = 1 value = 2</span></span>
 <span><span class="co">#&gt; 6      6 Placebo value = 1 value = 2</span></span>
 <span><span class="co">#&gt; 7      7 Placebo value = 2 value = 2</span></span>

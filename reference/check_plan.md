@@ -68,6 +68,7 @@ https://www.sealedenvelope.com/randomisation/simulation/
 ## Examples
 
 ``` r
+
 check_plan(50, 3, n_sim = 50)
 #> 
 #> Number of simulated trials: 50 
