@@ -88,6 +88,32 @@ table(r2$arm)
 
 Adaptive trials sometimes modify the randomisation balance part way through a trial, which can be accomplished via this method.
 
+### More control over randomisation lists
+
+In some cases, such as relatively short randomisation lists including larger block sizes, it may be desirable to use smaller blocks at the beginning of a randomisation list. The `n_init` and `init_probs` arguments provide the means to accomplish that. They add `n_init` blocks to the beginning of the randomisation list (per strata) with blocksizes according to `init_probs`.
+
+For example, the following code will add 2 blocks with blocks of size 2 and 3 with probabilities of 0.8 and 0.2, respectively, and no blocks of size 6.
+
+```{r, eval=FALSE}
+randolist(n = 50, n_init = 2, init_probs = c(.8,.2,0))
+```
+
+We can go beyond the addition of `n_init` blocks to the beginning of the list. Using this method, we can use specific probabilities for the various blocksizes (by default, intermediate blocksizes are more frequent than the smallest/largest, when `pascal = TRUE`, or equal probabilities, when `pascal = FALSE`). In order to specify the probabilities for the full list, set `n_init` to some value large enough that the full list can be generated with the `n_init` blocks (e.g. `n_init` should be at least `n`/`min(blocksizes)`). For example, to generate a list with block sizes 2, 4 and 6 with probabilities of 0.7, .2, .1, i.e. prioritizing blocks of size 2, and 50 randomisations, we can use the following code:
+
+```{r}
+r <- randolist(n = 50, 
+          blocksizes = 1:3, # blocksizes*length(arms) = final blocksizes
+          n_init = 25, # 50/min(blocksizes*length(arms))
+          init_probs = c(.7,.2,.1))
+```
+
+This gives the following blocksize frequencies:
+
+```{r}
+table(r$blocksize)/c(2,4,6)
+```
+
+
 ## Summarizing randomisation lists
 
 It can be helpful to summarize the randomisation list to check that the requirements, such as the balance, coding, etc, are met. The `randolist` package includes a `summary` precisely for this purpose:
