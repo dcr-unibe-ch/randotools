@@ -15,6 +15,9 @@
 #' @param arms number of arms to randomise
 #' @param blocksizes numbers of each arm to include in blocks
 #' @param pascal logical, whether to use pascal's triangle to determine block sizes
+#' @param n_init number of initial blocks to start the randomisation list with
+#' @param init_probs probabilities to use for each \code{blocksize} for the
+#' first \code{n_init} blocks
 #' @param ... arguments passed on to other methods (currently unused)
 #'
 #' @returns a data frame with columns block, blocksize, seq_in_block, arm
@@ -40,11 +43,20 @@ blockrand <- function(n,
                       arms = LETTERS[seq(2)],
                       blocksizes = 1:4,
                       pascal = TRUE,
+                      n_init = 0,
+                      init_probs = NULL,
                       ...
                       ){
 
   if(n < 2) stop("n too small")
   if(is.null(arms)) stop("arms must be provided")
+  if(n_init > 0){
+    if(is.null(init_probs))
+      stop("'init_probs' must be entered when 'n_init' > 0")
+    if(length(init_probs) != length(blocksizes))
+      stop("'length(init_probs) != length(blocksizes)' : provide probabilities for each blocksize")
+
+  }
 
   N_per_block <- blocksizes * length(arms)
 
@@ -59,6 +71,10 @@ blockrand <- function(n,
 
     # generate block sizes
     blocks <- sample(N_per_block, min_blocks, replace = TRUE, prob = p)
+    if(n_init > 0){
+      init_blocks <- sample(N_per_block, n_init, replace = TRUE, prob = init_probs)
+      blocks <- c(init_blocks, blocks)
+    }
 
     # select blocks to reach n
     blocks <- blocks[1:min(which(cumsum(blocks) >= n))]

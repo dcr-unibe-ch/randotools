@@ -1,6 +1,6 @@
 Package: randotools
 Title: Create Randomization Lists
-Version: 0.2.6
+Version: 0.2.7
 Authors@R: 
     c(person("Alan G", "Haynes", email = "alan.haynes@unibe.ch", 
              role = c("aut", "cre"),
@@ -12,7 +12,6 @@ URL: https://dcr-unibe-ch.github.io/randotools/, https://github.com/dcr-unibe-ch
 BugReports: https://github.com/dcr-unibe-ch/randotools/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Imports:
     cli,
     dplyr,
@@ -31,3 +30,4 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 4.1)
 LazyData: true
+Config/roxygen2/version: 8.0.0
