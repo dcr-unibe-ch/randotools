@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/dcr-unibe-ch/randotools/blob/main/DESCRIPTION)
 
 Haynes A (2026). *randotools: Create Randomization Lists*. R package
-version 0.2.7, <https://dcr-unibe-ch.github.io/randotools/>.
+version 0.2.8, <https://dcr-unibe-ch.github.io/randotools/>.
 
     @Manual{,
       title = {randotools: Create Randomization Lists},
       author = {Alan G Haynes},
       year = {2026},
-      note = {R package version 0.2.7},
+      note = {R package version 0.2.8},
       url = {https://dcr-unibe-ch.github.io/randotools/},
     }

@@ -208,8 +208,8 @@ This gives the following blocksize frequencies:
 
 table(r$blocksize)/c(2,4,6)
 #> 
-#> 2 4 6 
-#> 7 3 4
+#>  2  4  6 
+#> 11  4  2
 ```
 
 ## Summarizing randomisation lists
@@ -223,15 +223,15 @@ package includes a `summary` precisely for this purpose:
 randolist(n = 20, arms = c("Trt1", "Trt2")) |> summary()
 #> ---- Randomisation list report ----
 #> -- Overall
-#> Total number of randomisations:  22 
+#> Total number of randomisations:  20 
 #> Randomisation groups:  Trt1 : Trt2 
 #> Randomisation ratio: 1:1 
 #> Randomisations to each arm:
 #> Trt1 Trt2 
-#>   11   11 
+#>   10   10 
 #> Block sizes:
-#> 2 4 6 
-#> 1 2 2
+#> 4 
+#> 5
 ```
 
 The summary for stratified randomisation lists also includes information
@@ -270,14 +270,14 @@ randolist_to_db(rs2, target_db = "REDCap",
                 strata_enc = list(sex = data.frame(sex = c("Male", "Female"), code = 1:2),
                                   age = data.frame(age = c("Teen", "Adult"), code = 1:2)))
 #>   rand_result sex age
-#> 1           2   1   1
-#> 2           1   1   1
-#> 3           1   2   1
-#> 4           2   2   1
-#> 5           1   1   2
-#> 6           2   1   2
-#> 7           2   2   2
-#> 8           1   2   2
+#> 1           1   1   1
+#> 2           2   1   1
+#> 3           2   2   1
+#> 4           1   2   1
+#> 5           2   1   2
+#> 6           1   1   2
+#> 7           1   2   2
+#> 8           2   2   2
 ```
 
 SecuTrial uses a more standardised format, so `rando_encoding` is not
@@ -289,14 +289,14 @@ randolist_to_db(rs2, target_db = "secuTrial",
                 strata_enc = list(sex = data.frame(sex = c("Male", "Female"), code = 1:2),
                                   age = data.frame(age = c("Teen", "Adult"), code = 1:2)))
 #>   Number   Group       sex       age
-#> 1      1 Placebo value = 1 value = 1
-#> 2      2 Aspirin value = 1 value = 1
-#> 3      3 Aspirin value = 2 value = 1
-#> 4      4 Placebo value = 2 value = 1
-#> 5      5 Aspirin value = 1 value = 2
-#> 6      6 Placebo value = 1 value = 2
-#> 7      7 Placebo value = 2 value = 2
-#> 8      8 Aspirin value = 2 value = 2
+#> 1      1 Aspirin value = 1 value = 1
+#> 2      2 Placebo value = 1 value = 1
+#> 3      3 Placebo value = 2 value = 1
+#> 4      4 Aspirin value = 2 value = 1
+#> 5      5 Placebo value = 1 value = 2
+#> 6      6 Aspirin value = 1 value = 2
+#> 7      7 Aspirin value = 2 value = 2
+#> 8      8 Placebo value = 2 value = 2
 ```
 
 The dataframe returned can then be exported to CSV or xlsx and imported
