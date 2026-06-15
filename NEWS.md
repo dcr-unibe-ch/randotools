@@ -1,3 +1,7 @@
+# randotools 0.2.8
+
+set seed in vignette example (to fix issue in CRAN submission)
+
 # randotools 0.2.7
 
 * Addition of the ability to prioritize small blocksizes at the start of a randomization list. See `randolist`.

@@ -1,6 +1,6 @@
 Package: randotools
 Title: Create Randomization Lists
-Version: 0.2.7
+Version: 0.2.8
 Authors@R: 
     c(person("Alan G", "Haynes", email = "alan.haynes@unibe.ch", 
              role = c("aut", "cre"),
