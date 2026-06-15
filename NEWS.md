@@ -1,6 +1,7 @@
 # randotools 0.2.7
 
-Addition of the ability to prioritize small blocksizes at the start of a randomization list. See `randolist`.
+* Addition of the ability to prioritize small blocksizes at the start of a randomization list. See `randolist`.
+* bug fix: the pascal argument to randolist was ignored. it's not used correctly.
 
 # randotools 0.2.6
 

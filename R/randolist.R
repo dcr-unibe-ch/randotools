@@ -26,6 +26,7 @@
 #' intermediate sized blocks, which helps with making it more difficult to guess
 #' future allocations, and reduces the risk of finishing in the middle of a large
 #' block.
+#' If\code{pascal = FALSE}, all \code{blocksize}s have the same frequency.
 #'
 #' Unbalanced randomization is possible by specifying the same arm label multiple times.
 #'
@@ -83,7 +84,7 @@ randolist <- function(n,
 
   if(!strata_y) {
 
-    rlist <- blockrand(n = n, arms = arms, blocksizes = blocksizes,
+    rlist <- blockrand(n = n, arms = arms, blocksizes = blocksizes, pascal = pascal,
                        n_init = n_init, init_probs = init_probs, ...)
 
   } else {
@@ -97,7 +98,7 @@ randolist <- function(n,
       stratum <- nth[x]
 
       # generate randomization for this stratum
-      rlist <- blockrand(n = n, arms = arms, blocksizes = blocksizes,
+      rlist <- blockrand(n = n, arms = arms, blocksizes = blocksizes, pascal = pascal,
                          n_init = n_init, init_probs = init_probs, ...)
 
       # add stratum information to the randomization
