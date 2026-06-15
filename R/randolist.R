@@ -32,9 +32,21 @@
 #' To disable block randomisation, set \code{blocksizes} to the same value as \code{n}.
 #'
 #' It can be helpful to use smaller blocks at the start of a randomisation list.
-#' \code{n_small} allows you to define how many blocks to add at the beginning of
+#' \code{n_init} allows you to define how many blocks to add at the beginning of
 #' the list with a different set of blocksize probabilities (entered via
-#' \code{init_probs})
+#' \code{init_probs}). Note that this modifies the final frequencies of the
+#' blocksizes - they are no longer according to normal settings (pascals triangle, if
+#' \code{pascal = TRUE}, or approximately equal, if \code{pascal = FALSE}).
+#' Depending on the settings, it may even be that some blocksizes are not observed at
+#' all (e.g. if \code{n_init} exceeds the total number of blocks required and
+#' \code{init_probs = c(.8, .1, 0)}, there will be none of the larger blocks in
+#' the randomisation list.
+#'
+#' \code{n_init} and \code{init_probs} allow more control over the blocksize
+#' probabilities than is otherwise possible (i.e. with the \code{pascal} argument).
+#' Suppose you want primarily blocks of size 2, with some blocks of size 4, you might
+#' set \code{n_init} to \code{n/2} (as if all blocks were of size 2, just to ensure
+#' that there are enough blocks for all randomisations) and set \code{init_probs = c(0.8, .2)}.
 #'
 #' @export
 #'
