@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![](https://img.shields.io/badge/dev%20version-0.2.7-blue.svg)](https://github.com/dcr-unibe-ch/randotools)
+[![](https://img.shields.io/badge/dev%20version-0.2.8-blue.svg)](https://github.com/dcr-unibe-ch/randotools)
 [![R-CMD-check](https://github.com/dcr-unibe-ch/randotools/workflows/R-CMD-check/badge.svg)](https://github.com/dcr-unibe-ch/randotools/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/randotools)](https://CRAN.R-project.org/package=randotools)
